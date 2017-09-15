@@ -204,6 +204,7 @@ namespace MenuOption {
     const QString mirrorCloseUp = "Close Up";
     const QString mirrorMedium = "Medium Shot";
     const QString mirrorLong = "Long Shot";
+    const QString mirrorDistance = "Controller...";
 
 }
 

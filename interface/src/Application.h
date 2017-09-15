@@ -356,6 +356,7 @@ public slots:
     void shotCloseUp();
     void shotMedium();
     void shotLong();
+    void shotController();
 
 #if (PR_BUILD || DEV_BUILD)
     void sendWrongProtocolVersionsSignature(bool checked) { ::sendWrongProtocolVersionsSignature(checked); }
@@ -401,6 +402,7 @@ public slots:
     void addAssetToWorldMessageClose();
 
     void loadLODToolsDialog();
+    void loadDistanceDialog(float &_scaleDistance);
     void loadEntityStatisticsDialog();
     void loadDomainConnectionDialog();
     void showScriptLogs();

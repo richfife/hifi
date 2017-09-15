@@ -6959,6 +6959,15 @@ void Application::loadLODToolsDialog() {
     }
 }
 
+void Application::loadDistanceDialog(float &_scaleDistance) {
+    auto tabletScriptingInterface = DependencyManager::get<TabletScriptingInterface>();
+    auto tablet = dynamic_cast<TabletProxy*>(tabletScriptingInterface->getTablet(SYSTEM_TABLET));
+    if (tablet->getToolbarMode() || (!tablet->getTabletRoot() && !isHMDMode())) {
+        auto dialogsManager = DependencyManager::get<DialogsManager>();
+        dialogsManager->distance(_scaleDistance);
+    }
+}
+
 
 void Application::loadEntityStatisticsDialog() {
     auto tabletScriptingInterface = DependencyManager::get<TabletScriptingInterface>();
@@ -7677,6 +7686,13 @@ void Application::shotLong()
 
 {
     _scaleMirror = 20.00f;
+}
+
+
+void Application::shotController()
+
+{
+    loadDistanceDialog(_scaleMirror);
 }
 
 #include "Application.moc"

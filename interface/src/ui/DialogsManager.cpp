@@ -137,6 +137,18 @@ void DialogsManager::lodTools() {
     _lodToolsDialog->raise();
 }
 
+void DialogsManager::distance(float &_scaleDistance) {
+    if (!_distanceDialog) {
+        maybeCreateDialog(_distanceDialog);
+
+        _distanceDialog->SetDistancePointer(&_scaleDistance);
+
+        connect(_distanceDialog, SIGNAL(closed()), _distanceDialog, SLOT(deleteLater()));
+        _distanceDialog->show();
+    }
+    _distanceDialog->raise();
+}
+
 void DialogsManager::hmdTools(bool showTools) {
     if (showTools) {
         if (!_hmdToolsDialog) {

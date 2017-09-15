@@ -18,6 +18,7 @@
 
 #include "HMDToolsDialog.h"
 #include "TestingDialog.h"
+#include "CameraDistanceDialog.h"
 
 class AnimationsDialog;
 class AttachmentsDialog;
@@ -48,6 +49,7 @@ public slots:
     void toggleLoginDialog();
     void showLoginDialog();
     void octreeStatsDetails();
+    void distance(float &_scaleDistance);
     void lodTools();
     void hmdTools(bool showTools);
     void showDomainConnectionDialog();
@@ -75,6 +77,7 @@ private:
     QPointer<QMessageBox> _ircInfoBox;
     QPointer<HMDToolsDialog> _hmdToolsDialog;
     QPointer<LodToolsDialog> _lodToolsDialog;
+    QPointer<CameraDistanceDialog> _distanceDialog;
     QPointer<OctreeStatsDialog> _octreeStatsDialog;
     QPointer<TestingDialog> _testingDialog;
     QPointer<DomainConnectionDialog> _domainConnectionDialog;

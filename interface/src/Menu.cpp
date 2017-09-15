@@ -259,6 +259,10 @@ Menu::Menu() {
         shotMenu, MenuOption::mirrorLong, 0,
         false, qApp, SLOT(shotLong())));
 
+    auto shotController = cameraModeGroup->addAction(addCheckableActionToQMenuAndActionHash(
+        shotMenu, MenuOption::mirrorDistance, 0,
+        false, qApp, SLOT(shotController())));
+
 
     // View > Independent [advanced]
     auto viewIndependentAction = cameraModeGroup->addAction(addCheckableActionToQMenuAndActionHash(viewMenu,

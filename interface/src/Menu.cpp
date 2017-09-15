@@ -244,6 +244,22 @@ Menu::Menu() {
 
     viewMirrorAction->setProperty(exclusionGroupKey, QVariant::fromValue(cameraModeGroup));
 
+    // View > Shot
+    MenuWrapper* shotMenu = viewMenu->addMenu("Shot");
+
+    auto shotCloseUpAction = cameraModeGroup->addAction(addCheckableActionToQMenuAndActionHash(
+        shotMenu, MenuOption::mirrorCloseUp, 0,
+        false, qApp, SLOT(shotCloseUp())));
+
+    auto shotMediumAction = cameraModeGroup->addAction(addCheckableActionToQMenuAndActionHash(
+        shotMenu, MenuOption::mirrorMedium, 0,
+        false, qApp, SLOT(shotMedium())));
+
+    auto shotLongAction = cameraModeGroup->addAction(addCheckableActionToQMenuAndActionHash(
+        shotMenu, MenuOption::mirrorLong, 0,
+        false, qApp, SLOT(shotLong())));
+
+
     // View > Independent [advanced]
     auto viewIndependentAction = cameraModeGroup->addAction(addCheckableActionToQMenuAndActionHash(viewMenu,
         MenuOption::IndependentMode, 0,

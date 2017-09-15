@@ -200,6 +200,11 @@ namespace MenuOption {
     const QString VisibleToFriends = "Friends";
     const QString VisibleToNoOne = "No one";
     const QString WorldAxes = "World Axes";
+
+    const QString mirrorCloseUp = "Close Up";
+    const QString mirrorMedium = "Medium Shot";
+    const QString mirrorLong = "Long Shot";
+
 }
 
 #endif // hifi_Menu_h

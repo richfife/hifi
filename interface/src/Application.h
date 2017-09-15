@@ -353,6 +353,10 @@ public slots:
     void resetSensors(bool andReload = false);
     void setActiveFaceTracker() const;
 
+    void shotCloseUp();
+    void shotMedium();
+    void shotLong();
+
 #if (PR_BUILD || DEV_BUILD)
     void sendWrongProtocolVersionsSignature(bool checked) { ::sendWrongProtocolVersionsSignature(checked); }
 #endif
@@ -576,6 +580,7 @@ private:
     Setting::Handle<bool> _preferAvatarFingerOverStylusSetting;
     Setting::Handle<bool> _constrainToolbarPosition;
     Setting::Handle<QString> _preferredCursor;
+    Setting::Handle<QString> _windowTag;
 
     float _scaleMirror;
     float _rotateMirror;

@@ -733,6 +733,7 @@ Application::Application(int& argc, char** argv, QElapsedTimer& startupTimer, bo
     _preferAvatarFingerOverStylusSetting("preferAvatarFingerOverStylus", DEFAULT_PREFER_AVATAR_FINGER_OVER_STYLUS),
     _constrainToolbarPosition("toolbar/constrainToolbarToCenterX", true),
     _preferredCursor("preferredCursor", DEFAULT_CURSOR_NAME),
+    _windowTag("windowTag", DEFAULT_WINDOW_TAG),
     _scaleMirror(1.0f),
     _rotateMirror(0.0f),
     _raiseMirror(0.0f),
@@ -1032,6 +1033,10 @@ Application::Application(int& argc, char** argv, QElapsedTimer& startupTimer, bo
         _preferredCursor.set(Cursor::Manager::getIconName(Cursor::Icon::SYSTEM));
     }
     showCursor(Cursor::Manager::lookupIcon(_preferredCursor.get()));
+
+    if (cmdOptionExists(argc, constArgv, "--window-tag")) {
+        _windowTag.set(getCmdOption(argc, constArgv, "--window-tag"));
+    }
 
     // enable mouse tracking; otherwise, we only get drag events
     _glWidget->setMouseTracking(true);
@@ -4638,11 +4643,13 @@ void Application::cameraModeChanged() {
 
 void Application::cameraMenuChanged() {
     auto menu = Menu::getInstance();
+    bool shotMenuActive = false;
     if (menu->isOptionChecked(MenuOption::FullscreenMirror)) {
         if (_myCamera.getMode() != CAMERA_MODE_MIRROR) {
             _myCamera.setMode(CAMERA_MODE_MIRROR);
             getMyAvatar()->reset(false, false, false); // to reset any active MyAvatar::FollowHelpers
         }
+        shotMenuActive = true;
     } else if (menu->isOptionChecked(MenuOption::FirstPerson)) {
         if (_myCamera.getMode() != CAMERA_MODE_FIRST_PERSON) {
             _myCamera.setMode(CAMERA_MODE_FIRST_PERSON);
@@ -4664,6 +4671,10 @@ void Application::cameraMenuChanged() {
             _myCamera.setMode(CAMERA_MODE_ENTITY);
         }
     }
+
+    MenuWrapper*shotMenu = menu->getSubMenuFromName("Shot", menu->getMenu("View"));
+
+    shotMenu->setEnabled(shotMenuActive);
 }
 
 void Application::resetPhysicsReadyInformation() {
@@ -5661,6 +5672,9 @@ void Application::updateWindowTitle() const {
 
     QString title = QString() + (!username.isEmpty() ? username + " @ " : QString())
         + currentPlaceName + connectionStatus + loginStatus + buildVersion;
+
+    if (_windowTag.isSet())
+        title += " " + _windowTag.get();
 
 #ifndef WIN32
     // crashes with vs2013/win32
@@ -7642,6 +7656,26 @@ QUuid Application::getTabletFrameID() const {
 void Application::setAvatarOverrideUrl(const QUrl& url, bool save) {
     _avatarOverrideUrl = url;
     _saveAvatarOverrideUrl = save;
+}
+
+void Application::shotCloseUp()
+
+{
+    _scaleMirror = 0.40f;
+}
+
+
+void Application::shotMedium()
+
+{
+    _scaleMirror = 2.00f;
+}
+
+
+void Application::shotLong()
+
+{
+    _scaleMirror = 20.00f;
 }
 
 #include "Application.moc"

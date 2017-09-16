@@ -31,6 +31,7 @@ public:
                                      const QVector<MeshFace>& faces);
     Q_INVOKABLE QScriptValue getVertexCount(MeshProxy* meshProxy);
     Q_INVOKABLE QScriptValue getVertex(MeshProxy* meshProxy, int vertexIndex);
+    Q_INVOKABLE QScriptValue getVertexDistance(MeshProxy* meshProxy, int vertexIndex1, int vertexIndex2);
 
 private:
     QScriptEngine* _modelScriptEngine { nullptr };

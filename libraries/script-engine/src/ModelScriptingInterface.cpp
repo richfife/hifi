@@ -194,6 +194,27 @@ QScriptValue ModelScriptingInterface::getVertex(MeshProxy* meshProxy, int vertex
     return vec3toScriptValue(_modelScriptEngine, pos);
 }
 
+QScriptValue ModelScriptingInterface::getVertexDistance(MeshProxy* meshProxy, int vertexIndex1, int vertexIndex2) {
+
+    QScriptValue v1 = getVertex(meshProxy, vertexIndex1);
+
+    if (v1.isBoolean() && !v1.toBoolean())
+        return v1;
+
+    QScriptValue v2 = getVertex(meshProxy, vertexIndex2);
+
+    if (v2.isBoolean() && !v2.toBoolean())
+        return v2;
+
+    glm::vec3 vec1, vec2;
+
+    vec3FromScriptValue(v1, vec1);
+    vec3FromScriptValue(v2, vec2);
+
+    float d = glm::distance(vec1, vec2);
+
+    return QScriptValue(d);
+}
 
 QScriptValue ModelScriptingInterface::newMesh(const QVector<glm::vec3>& vertices,
                                               const QVector<glm::vec3>& normals,

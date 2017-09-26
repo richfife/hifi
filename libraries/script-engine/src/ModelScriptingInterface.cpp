@@ -198,13 +198,15 @@ QScriptValue ModelScriptingInterface::getVertexDistance(MeshProxy* meshProxy, in
 
     QScriptValue v1 = getVertex(meshProxy, vertexIndex1);
 
-    if (v1.isBoolean() && !v1.toBoolean())
+    if (v1.isBoolean() && !v1.toBoolean()) {
         return v1;
+    }
 
     QScriptValue v2 = getVertex(meshProxy, vertexIndex2);
 
-    if (v2.isBoolean() && !v2.toBoolean())
+    if (v2.isBoolean() && !v2.toBoolean()) {
         return v2;
+    }
 
     glm::vec3 vec1, vec2;
 

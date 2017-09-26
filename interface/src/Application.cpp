@@ -5694,8 +5694,9 @@ void Application::updateWindowTitle() const {
     QString title = QString() + (!username.isEmpty() ? username + " @ " : QString())
         + currentPlaceName + connectionStatus + loginStatus + buildVersion;
 
-    if (_windowTag.isSet())
+    if (_windowTag.isSet()) {
         title += " " + _windowTag.get();
+    }
 
 #ifndef WIN32
     // crashes with vs2013/win32
@@ -7706,30 +7707,22 @@ void Application::setAvatarOverrideUrl(const QUrl& url, bool save) {
     _saveAvatarOverrideUrl = save;
 }
 
-void Application::shotCloseUp()
-
-{
+void Application::shotCloseUp() {
     _scaleMirror = 0.40f;
 }
 
 
-void Application::shotMedium()
-
-{
+void Application::shotMedium() {
     _scaleMirror = 2.00f;
 }
 
 
-void Application::shotLong()
-
-{
+void Application::shotLong() {
     _scaleMirror = 20.00f;
 }
 
 
-void Application::shotController()
-
-{
+void Application::shotController() {
     loadDistanceDialog(_scaleMirror);
 }
 

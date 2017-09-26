@@ -25,8 +25,7 @@
 
 
 CameraDistanceDialog::CameraDistanceDialog(QWidget* parent) :
-    QDialog(parent, Qt::Window | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint) 
-{
+    QDialog(parent, Qt::Window | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint) {
     this->setWindowTitle("Camera Distance");
     // Create layouter
     QFormLayout* form = new QFormLayout(this);
@@ -72,9 +71,7 @@ CameraDistanceDialog::CameraDistanceDialog(QWidget* parent) :
     updateDistanceAdjust();
 }
 
-void CameraDistanceDialog::SetDistancePointer(float *scaleDistance)
-
-{
+void CameraDistanceDialog::SetDistancePointer(float *scaleDistance) {
     _scaleDistance = scaleDistance;
 
 }
@@ -87,8 +84,9 @@ void CameraDistanceDialog::updateDistanceAdjust() {
 
 void CameraDistanceDialog::distanceValueChanged(int value) {
 
-    if(_scaleDistance)
+    if (_scaleDistance) {
         *_scaleDistance = static_cast<float>(value) / 10.0f;
+    }
 }
 
 void CameraDistanceDialog::resetClicked(bool checked) {
